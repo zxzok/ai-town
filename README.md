@@ -122,6 +122,39 @@ npm run dev
 
 项目将在 http://localhost:5173 启动
 
+## ⚙️ 环境配置
+
+### 创建环境变量文件
+
+```bash
+# 复制环境变量模板
+cp .env.example .env.local
+```
+
+### 必需配置
+
+**Convex 后端服务 (必需):**
+1. 访问 [https://dashboard.convex.dev](https://dashboard.convex.dev)
+2. 创建新项目
+3. 在 `.env.local` 中配置：
+   ```
+   CONVEX_DEPLOYMENT=your_deployment_url
+   NEXT_PUBLIC_CONVEX_URL=your_convex_url
+   ```
+
+### 可选配置
+
+**如需使用云端LLM服务:**
+```bash
+# OpenAI
+OPENAI_API_KEY=your_openai_api_key_here
+
+# 或 Together.ai
+TOGETHER_API_KEY=your_together_api_key_here
+```
+
+**注意:** 本项目默认使用Ollama本地推理，无需额外API密钥。
+
 You can now visit http://localhost:5173.
 
 If you'd rather run the frontend and backend separately (which syncs your backend functions as
