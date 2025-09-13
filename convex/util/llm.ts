@@ -2,7 +2,7 @@
 
 const OPENAI_EMBEDDING_DIMENSION = 1536;
 const TOGETHER_EMBEDDING_DIMENSION = 768;
-const OLLAMA_EMBEDDING_DIMENSION = 1024;
+export const OLLAMA_EMBEDDING_DIMENSION = 768;   // nomic-embed-text 的维度
 
 export const EMBEDDING_DIMENSION: number = OLLAMA_EMBEDDING_DIMENSION;
 
@@ -704,3 +704,4 @@ export async function ollamaFetchEmbedding(text: string) {
   });
   return { embedding: result };
 }
+
