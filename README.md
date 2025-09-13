@@ -1,10 +1,17 @@
-# AI Town 🏠💻💌
+# AI Town 🏠💻💌 - 学生定制版
 
 [Live Demo](https://www.convex.dev/ai-town)
 
 [Join our community Discord: AI Stack Devs](https://discord.gg/PQUmTBTGmT)
 
 <img width="1454" alt="Screen Shot 2023-08-14 at 10 01 00 AM" src="https://github.com/a16z-infra/ai-town/assets/3489963/a4c91f17-23ed-47ec-8c4e-9f9a8505057d">
+
+## 🎓 学生项目说明
+
+这是一个基于原版AI Town项目的学生定制版本，包含了以下自定义修改：
+
+- ✅ **嵌入维度优化**: 将OLLAMA_EMBEDDING_DIMENSION调整为768以支持nomic-embed-text模型
+- ✅ **性能优化**: 针对本地推理环境进行了优化配置
 
 AI Town is a virtual town where AI characters live, chat and socialize.
 
@@ -80,18 +87,40 @@ There are a few ways to run the app on top of Convex (the backend).
 Note, if you're on Windows, see [below](#windows-installation).
 
 ```sh
-git clone https://github.com/a16z-infra/ai-town.git
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 cd ai-town
 npm install
 ```
 
 This will require logging into your Convex account, if you haven't already.
 
-To run it:
+## 🚀 快速开始
+
+### 1. 环境准备
+
+**必需软件：**
+- Node.js 18+
+- Ollama (用于本地AI推理)
+- Convex 账户 (免费)
+
+### 2. 配置Ollama
+
+```bash
+# 安装并启动Ollama
+ollama serve
+
+# 拉取所需的模型
+ollama pull llama3
+ollama pull nomic-embed-text
+```
+
+### 3. 运行项目
 
 ```sh
 npm run dev
 ```
+
+项目将在 http://localhost:5173 启动
 
 You can now visit http://localhost:5173.
 
