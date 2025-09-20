@@ -22,11 +22,11 @@ export default PixiComponent('Viewport', {
   create(props: ViewportProps) {
     const { app, children, viewportRef, ...viewportProps } = props;
     const viewport = new Viewport({
+      ...(viewportProps as unknown as Record<string, unknown>),
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       events: app.renderer.events,
       passiveWheel: false,
-      ...viewportProps,
-    });
+    } as any);
     if (viewportRef) {
       viewportRef.current = viewport;
     }

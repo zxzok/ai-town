@@ -35,6 +35,8 @@ export default function Game() {
   const { historicalTime, timeManager } = useHistoricalTime(worldState?.engine);
 
   const scrollViewRef = useRef<HTMLDivElement>(null);
+  const stageWidth = width ?? 0;
+  const stageHeight = height ?? 0;
 
   if (!worldId || !engineId || !game) {
     return null;
@@ -47,7 +49,7 @@ export default function Game() {
         <div className="relative overflow-hidden bg-brown-900" ref={gameWrapperRef}>
           <div className="absolute inset-0">
             <div className="container">
-              <Stage width={width} height={height} options={{ backgroundColor: 0x7ab5ff }}>
+              <Stage width={stageWidth} height={stageHeight} options={{ backgroundColor: 0x7ab5ff }}>
                 {/* Re-propagate context because contexts are not shared between renderers.
 https://github.com/michalochman/react-pixi-fiber/issues/145#issuecomment-531549215 */}
                 <ConvexProvider client={convex}>
@@ -55,8 +57,8 @@ https://github.com/michalochman/react-pixi-fiber/issues/145#issuecomment-5315492
                     game={game}
                     worldId={worldId}
                     engineId={engineId}
-                    width={width}
-                    height={height}
+                    width={stageWidth}
+                    height={stageHeight}
                     historicalTime={historicalTime}
                     setSelectedElement={setSelectedElement}
                   />
