@@ -1,0 +1,196 @@
+{
+  "name": "hadza_cooperation",
+  "displayName": "Hadza Cooperation Baseline",
+  "description": "Default Hadza-style mobile camp with seasonal foraging, mixed hunting parties and food sharing norms.",
+  "map": {
+    "widthKm": 20,
+    "heightKm": 20
+  },
+  "timeline": {
+    "seasonLengthDays": 90,
+    "dayDurationHours": 24,
+    "dailyMicroInteractions": ["dawn_briefing", "midday_alliance", "evening_allocation"]
+  },
+  "seasons": [
+    {
+      "name": "spring",
+      "resourceMultiplier": 1.0,
+      "climateNoise": 0.15,
+      "notes": "Transition period with reliable plant foods and low migration pressure."
+    },
+    {
+      "name": "summer",
+      "resourceMultiplier": 1.15,
+      "climateNoise": 0.2,
+      "notes": "High fruit abundance and dispersed small game."
+    },
+    {
+      "name": "autumn",
+      "resourceMultiplier": 1.25,
+      "climateNoise": 0.25,
+      "notes": "Migration of large ungulates opens high-risk, high-return hunts."
+    },
+    {
+      "name": "winter",
+      "resourceMultiplier": 0.65,
+      "climateNoise": 0.35,
+      "notes": "Lean season with elevated hypothermia risk and scarce fauna."
+    }
+  ],
+  "resources": {
+    "basePlantRate": 0.9,
+    "baseSmallGameRate": 0.35,
+    "baseLargeGameRate": 0.05,
+    "poissonGamma": {
+      "shape": 2.2,
+      "scale": 1.1
+    },
+    "logGaussian": {
+      "mean": 0.0,
+      "variance": 0.4
+    },
+    "seasonalLargeGameBonus": {
+      "autumn": 4.0
+    }
+  },
+  "hazards": {
+    "base": {
+      "injury": 0.04,
+      "hypothermia": 0.02,
+      "predator": 0.01
+    },
+    "seasonal": {
+      "winter": {
+        "hypothermia": 0.05
+      },
+      "summer": {
+        "injury": -0.01
+      },
+      "autumn": {
+        "predator": 0.03
+      }
+    }
+  },
+  "tasks": [
+    {
+      "id": "plant_gathering",
+      "name": "植物采集",
+      "category": "foraging",
+      "successProbability": 1.0,
+      "yieldPerParticipant": 1.5,
+      "energyCost": 0.4,
+      "injuryRiskMultiplier": 0.5,
+      "minParticipants": 1,
+      "recommendedParticipants": 4,
+      "roles": ["scout", "carrier"],
+      "norm": "equal_share"
+    },
+    {
+      "id": "small_game_hunt",
+      "name": "小型猎物狩猎",
+      "category": "hunting",
+      "successProbability": 0.5,
+      "yieldPerParticipantOnSuccess": 3.0,
+      "energyCost": 0.8,
+      "injuryRiskMultiplier": 1.0,
+      "minParticipants": 2,
+      "recommendedParticipants": 3,
+      "roles": ["tracker", "flusher"],
+      "norm": "proportional_skill"
+    },
+    {
+      "id": "large_game_hunt",
+      "name": "大型猎物狩猎",
+      "category": "hunting",
+      "successProbability": 0.1,
+      "yieldPerParticipantOnSuccess": 20.0,
+      "energyCost": 1.3,
+      "injuryRiskMultiplier": 2.5,
+      "minParticipants": 4,
+      "recommendedParticipants": 6,
+      "roles": ["spear", "driver", "butcher"],
+      "norm": "key_contributor_reward"
+    },
+    {
+      "id": "camp_maintenance",
+      "name": "营地维护",
+      "category": "public_good",
+      "successProbability": 1.0,
+      "yieldPerParticipant": 0.0,
+      "energyCost": 0.3,
+      "injuryRiskMultiplier": 0.2,
+      "minParticipants": 2,
+      "recommendedParticipants": 5,
+      "roles": ["fire_keeper", "shelter"],
+      "norm": "collective_penalty"
+    }
+  ],
+  "agentPopulation": {
+    "size": 28,
+    "genderRatio": 0.48,
+    "ageDistribution": {
+      "min": 15,
+      "max": 55,
+      "mean": 29
+    },
+    "skillProfiles": {
+      "gathering": {
+        "mean": 0.6,
+        "std": 0.15
+      },
+      "hunting": {
+        "mean": 0.55,
+        "std": 0.2
+      },
+      "crafting": {
+        "mean": 0.5,
+        "std": 0.1
+      },
+      "firekeeping": {
+        "mean": 0.65,
+        "std": 0.1
+      }
+    },
+    "socialPreferences": {
+      "alphaMean": 0.6,
+      "alphaStd": 0.15,
+      "betaMean": 0.25,
+      "betaStd": 0.1,
+      "reputationWeight": 0.35,
+      "normPenalty": 0.2
+    }
+  },
+  "cognition": {
+    "semanticMemoryWeight": 0.4,
+    "socialMemoryHorizonDays": 45,
+    "episodicWindowDays": 14,
+    "reflectionIntervalDays": 1,
+    "emotion": {
+      "decay": 0.18,
+      "baselineValence": 0.1,
+      "baselineArousal": 0.35
+    },
+    "timeDiscount": 0.92
+  },
+  "network": {
+    "decay": 0.06,
+    "gossipWeight": 0.4,
+    "geographicDecay": 0.2,
+    "assortativityPreference": 0.25,
+    "triadicClosureWeight": 0.3,
+    "reciprocityWeight": 0.35
+  },
+  "logging": {
+    "eventLog": true,
+    "taskLog": true,
+    "networkLog": true,
+    "causalGraph": true
+  },
+  "llm": {
+    "defaultProvider": "openai-responses",
+    "planTemplate": "You are acting as a Hadza-inspired forager balancing cooperation, risk and norms. Decide high-level options." 
+  },
+  "defaults": {
+    "dailyEnergyNeed": 1.0
+  }
+}
