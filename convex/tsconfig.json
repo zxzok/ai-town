@@ -12,6 +12,10 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "paths": {
+      "zod": ["../vendor/zod/index.ts"],
+      "zod-to-json-schema": ["../vendor/zod-to-json-schema/index.ts"]
+    },
 
     /* These compiler options are required by Convex */
     "target": "ESNext",

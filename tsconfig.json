@@ -21,7 +21,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "zod": ["./vendor/zod/index.ts"],
+      "zod-to-json-schema": ["./vendor/zod-to-json-schema/index.ts"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "postcss.config.js"],
